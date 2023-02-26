@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#340059"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="@color/purple_500"
+        android:layout_marginTop="0dp"
+        android:id="@+id/toolbarMaterial"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="News Feed"
+                android:textStyle="bold"
+                android:textSize="25sp"/>
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/category_list_item"
+        android:id="@+id/recyclerCategory"
+
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_below="@+id/toolbarMaterial"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerContent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/headline_list_item"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/recyclerCategory"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp" />
+</RelativeLayout>
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/TabLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:layout_below="@+id/toolbarMaterial"-->
+<!--        app:tabIndicatorColor="@color/black"-->
+<!--        app:tabIndicatorHeight="4dp"-->
+<!--        app:tabMode="scrollable"-->
+<!--        app:tabGravity="center"-->
+<!--        app:tabTextColor="@color/purple_700"-->
+<!--        app:tabSelectedTextColor="@color/teal_700">-->
+
+<!--&lt;!&ndash;        <com.google.android.material.tabs.TabItem&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/HomeTab"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_gravity="center_horizontal"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="Home"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <com.google.android.material.tabs.TabItem&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/HomeTab2"&ndash;&gt;-->
+
+<!--&lt;!&ndash;            android:layout_gravity="center_horizontal"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="Home"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <com.google.android.material.tabs.TabItem&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/HomeTab3"&ndash;&gt;-->
+
+<!--&lt;!&ndash;            android:layout_gravity="center_horizontal"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="Home"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <com.google.android.material.tabs.TabItem&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/SportsTab"&ndash;&gt;-->
+
+<!--&lt;!&ndash;            android:layout_gravity="center_horizontal"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="Home"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <com.google.android.material.tabs.TabItem&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/TechTab"&ndash;&gt;-->
+
+<!--&lt;!&ndash;            android:layout_gravity="center_horizontal"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="Home"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <com.google.android.material.tabs.TabItem&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/HealthTab"&ndash;&gt;-->
+
+<!--&lt;!&ndash;            android:layout_gravity="center_horizontal"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="Home"/>&ndash;&gt;-->
+
+
+<!--    </com.google.android.material.tabs.TabLayout>-->
+
+
