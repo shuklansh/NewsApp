@@ -47,18 +47,25 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerContent"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_width="match_parent"
-        tools:listitem="@layout/headline_list_item"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/recyclerCategory"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp" />
+        <FrameLayout
+            android:id="@+id/frameReplace"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/recyclerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerContent"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        tools:listitem="@layout/headline_list_item"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/recyclerCategory"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:layout_marginEnd="12dp"-->
+<!--        android:layout_marginBottom="12dp" />-->
 </RelativeLayout>
 <!--    <com.google.android.material.tabs.TabLayout-->
 <!--        android:id="@+id/TabLayout"-->

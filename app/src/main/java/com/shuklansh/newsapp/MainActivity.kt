@@ -1,5 +1,6 @@
 package com.shuklansh.newsapp
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +20,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.shuklansh.newsapp.Adapters.categoryRecyclerAdapter
+import com.shuklansh.newsapp.Fragments.NewsDisplayFragment
 import com.shuklansh.newsapp.Models.imgPlusLink
 import org.json.JSONException
 
@@ -29,12 +32,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var categoryRecyclerAdapter: categoryRecyclerAdapter
 
 
-    // Content recycler vars
-    lateinit var recyclerContent: RecyclerView
-    lateinit var contentLayoutManager: RecyclerView.LayoutManager
-    lateinit var contentRecyclerAdapter: categoryRecyclerAdapter
+//    // Content recycler vars
+//    lateinit var recyclerContent: RecyclerView
+//    lateinit var contentLayoutManager: RecyclerView.LayoutManager
+//    lateinit var contentRecyclerAdapter: categoryRecyclerAdapter
 
     lateinit var url: String
+    lateinit var frameLayoutReplace : FrameLayout
 
     val categoryList = arrayListOf<imgPlusLink>(
         imgPlusLink("general","https://images.unsplash.com/photo-1518057111178-44a106bad636?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"),
@@ -47,12 +51,19 @@ class MainActivity : AppCompatActivity() {
         imgPlusLink("science","https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"),
         imgPlusLink("health","https://images.unsplash.com/photo-1594882645126-14020914d58d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885&q=80"))
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        frameLayoutReplace = findViewById(R.id.frameReplace)
         recyclerCategory = findViewById(R.id.recyclerCategory)
-        recyclerContent = findViewById(R.id.recyclerContent)
+        //recyclerContent = findViewById(R.id.recyclerContent)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameReplace,NewsDisplayFragment())
+            .addToBackStack("NewsRecyclerView")
+            .commit()
 
         categoryLayoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         categoryRecyclerAdapter = categoryRecyclerAdapter(this, categoryList)
@@ -60,11 +71,9 @@ class MainActivity : AppCompatActivity() {
         recyclerCategory.layoutManager = categoryLayoutManager
 
 
-
-        val Gnews = "https://gnews.io/api/v4/search?q=example&lang=en&country=in&apikey=2ba40b1f3eee81067a9100fcb580bb4b"
+        val url = "https://gnews.io/api/v4/search?q=example&lang=en&country=in&apikey=2ba40b1f3eee81067a9100fcb580bb4b"
         val queue = Volley.newRequestQueue(applicationContext)
 
-        val url = Gnews
         //this is the url of server from where we will get the response. WE ALSO NEED A TOKEN ALONG WITH URL
         //anonymous object syntax. header will be sent with url
 

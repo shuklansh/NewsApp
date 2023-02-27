@@ -1,5 +1,8 @@
 package com.shuklansh.newsapp.Models
 
+import com.google.gson.JsonObject
+import org.json.JSONObject
+
 data class ArticleModel (
 
     //val author : String,
@@ -9,6 +12,6 @@ data class ArticleModel (
     val url : String,
     val image : String,
     val publishedAt : String,
-    val source : sourceDataModel
+    val source : JSONObject
 
 )
