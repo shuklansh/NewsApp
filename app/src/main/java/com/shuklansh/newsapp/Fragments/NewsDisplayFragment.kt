@@ -53,7 +53,7 @@ class NewsDisplayFragment : Fragment() {
         recyclerContent = view.findViewById(R.id.recyclerContent)
         val apikey = "2ba40b1f3eee81067a9100fcb580bb4b";
         val category = "general";
-        val url = "https://gnews.io/api/v4/top-headlines?lang=en&category=${category}&country=in&apikey=${apikey}";
+        val url = "https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&country=in&max=10&apikey=${apikey}";
 
         val queue = Volley.newRequestQueue(activity as Context)
 
