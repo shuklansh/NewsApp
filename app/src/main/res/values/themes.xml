@@ -16,12 +16,21 @@
 
     <style name="roundedImgView">
 
-        <item name="cornerFamily"> rounded </item>
+        <item name="cornerFamily">rounded</item>
 
-        <item name="cornerSize"> 10dp </item>
+        <item name="cornerSize">10dp</item>
 
-        <item name="color" >#00FFFFFF</item>
+        <item name="color">#00FFFFFF</item>
 
     </style>
+
+    <style name="Theme.NewsApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.NewsApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.NewsApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
