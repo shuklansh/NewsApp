@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameReplace,NewsDisplayFragment())
-            .addToBackStack("NewsRecyclerView")
             .commit()
 
         categoryLayoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
@@ -99,5 +98,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         queue.add(jsonObjectRequest)
+    }
+
+    override fun onBackPressed() {
+        /*
+        This function is for directing user to dashboard fragment from any other fragment, when back btn is pressed.
+        If dashboard frag is open already, then back btn will behave in its default manner i.e. exit app.
+         */
+        val fragmentCurrent = supportFragmentManager.findFragmentById(R.id.frameReplace) //fragmentCurrent variable will hold the fragment currently in the frameLayout
+        when(fragmentCurrent){ //fragmentcurrent is being used as arguement for when function (switch case)
+            !is NewsDisplayFragment -> openNewsDisplayFragment() //when current fragment is not dashboard fragment -> open dashboard fragment (function to open dashboard frag is called)
+            else->super.onBackPressed() //if the fragment currently in the framelayout is dashboard frag, then make the back btn behave in default manner i.e. exit app
+        }
+    }
+
+    fun openNewsDisplayFragment(){
+        val dashbordFrag= NewsDisplayFragment() //NewsDisplayFragment() is the fragment file for the dashboard, being stored in the variable dashbordFrag.
+        val transaction= supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameReplace,dashbordFrag)
+        transaction.commit()
     }
 }
