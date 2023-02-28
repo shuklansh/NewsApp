@@ -17,6 +17,7 @@ import com.shuklansh.newsapp.Adapters.contentRecyclerAdapter
 import com.shuklansh.newsapp.Models.ArticleModel
 import com.shuklansh.newsapp.Models.sourceDataModel
 import com.shuklansh.newsapp.R
+import com.shuklansh.newsapp.databinding.ActivityMainBinding
 
 
 private const val ARG_PARAM1 = "param1"
@@ -33,10 +34,16 @@ class NewsDisplayFragment : Fragment() {
     lateinit var contentLayoutManager: RecyclerView.LayoutManager
     lateinit var contentRecyclerAdapter: contentRecyclerAdapter
 
+    //lateinit var binding : ActivityMainBinding
+
     var ArticleDetails = arrayListOf<ArticleModel>()
+    lateinit var categoryName : String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -49,11 +56,19 @@ class NewsDisplayFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
+        //val args = this.arguments
+        //categoryName= args?.get("categoryFromCatRV")
+        //categoryName = args?.getString("categoryFromCatRV").toString()
+
+        categoryName = arguments?.getString("category").toString()
+
+        //println("in frag : ${categoryName}")
+        //categoryName = "general"
         val view = inflater.inflate(R.layout.fragment_news_display, container, false)
         recyclerContent = view.findViewById(R.id.recyclerContent)
         val apikey = "2ba40b1f3eee81067a9100fcb580bb4b";
-        val category = "general";
-        val url = "https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&country=in&max=10&apikey=${apikey}";
+
+        val url = "https://gnews.io/api/v4/top-headlines?category=${categoryName}&lang=en&country=in&max=10&apikey=${apikey}";
 
         val queue = Volley.newRequestQueue(activity as Context)
 

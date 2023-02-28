@@ -20,16 +20,17 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.shuklansh.newsapp.Adapters.categoryRecyclerAdapter
+import com.shuklansh.newsapp.Fragments.CategoryFragment
 import com.shuklansh.newsapp.Fragments.NewsDisplayFragment
 import com.shuklansh.newsapp.Models.imgPlusLink
 import org.json.JSONException
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , Communicator {
 
     // Category recycler vars
-    lateinit var recyclerCategory: RecyclerView
-    lateinit var categoryLayoutManager: RecyclerView.LayoutManager
-    lateinit var categoryRecyclerAdapter: categoryRecyclerAdapter
+//    lateinit var recyclerCategory: RecyclerView
+//    lateinit var categoryLayoutManager: RecyclerView.LayoutManager
+//    lateinit var categoryRecyclerAdapter: categoryRecyclerAdapter
 
 
 //    // Content recycler vars
@@ -37,8 +38,10 @@ class MainActivity : AppCompatActivity() {
 //    lateinit var contentLayoutManager: RecyclerView.LayoutManager
 //    lateinit var contentRecyclerAdapter: categoryRecyclerAdapter
 
+    lateinit var categoryname: String
     lateinit var url: String
     lateinit var frameLayoutReplace : FrameLayout
+    lateinit var frameLayoutReplaceCat : FrameLayout
 
     val categoryList = arrayListOf<imgPlusLink>(
         imgPlusLink("general","https://images.unsplash.com/photo-1518057111178-44a106bad636?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"),
@@ -57,47 +60,65 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         frameLayoutReplace = findViewById(R.id.frameReplace)
-        recyclerCategory = findViewById(R.id.recyclerCategory)
+        frameLayoutReplaceCat = findViewById(R.id.frameReplaceCat)
+
+        //recyclerCategory = findViewById(R.id.recyclerCategory)
         //recyclerContent = findViewById(R.id.recyclerContent)
+
+
+
+
+        //categoryname = "general"
+//        val apikey : String = "2ba40b1f3eee81067a9100fcb580bb4b"
+//        val url = "https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=in&max=10&apikey=${apikey}"
+//        val queue = Volley.newRequestQueue(applicationContext)
+//
+//        //this is the url of server from where we will get the response. WE ALSO NEED A TOKEN ALONG WITH URL
+//        //anonymous object syntax. header will be sent with url
+//
+//
+//        // check connectivity to internet and if true, proceed to get response and map data
+//        val jsonObjectRequest = object :
+//            JsonObjectRequest( //JOR method arguments: ReqMethod , url , jsonObject, ResponseListener, ErrorListener
+//                Request.Method.GET, url, null, Response.Listener {
+//                    println("Response is : $it")
+//                }, Response.ErrorListener { // so app does not crash due to no activity
+//                    //  VOLLEY ERRORS ARE HANDLED IN THE RESPONSE.ERRORLISTENER BLOCK. SO WE PUT TOAST HERE SAYING VOLLEY ERROR OCCURED
+//                    println("volley error occured $it")
+//                }) { //inside JsonObjectRequest(args) : we also send headers to validate unique request
+//            //GETHEADERS METHOD TO SEND HEADER TO API
+//            override fun getHeaders(): MutableMap<String, String> {
+//                //headers are used to ensure each request is UNIQUE
+//                //hashmap is another name for dictionary. so data is being received in string:string
+//                val headers = HashMap<String, String>() //hashmap is derived from a mutable map
+//                //headers["Content-type"] ="application/json" //key: content-type, value: application/json
+//                //headers[" "] = " " //key: token, value: unique key given
+//                return headers //this is sent to API.
+//            }
+//        }
+//
+//        queue.add(jsonObjectRequest)
+
+//        if(intent!=null){
+//            categoryname = intent.getStringExtra("categoryname").toString()
+//        }
+
+//        categoryLayoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+//        categoryRecyclerAdapter = categoryRecyclerAdapter(this@MainActivity,categoryList)
+//        recyclerCategory.adapter = categoryRecyclerAdapter
+//        recyclerCategory.layoutManager = categoryLayoutManager
+
+
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameReplace,NewsDisplayFragment())
             .commit()
 
-        categoryLayoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-        categoryRecyclerAdapter = categoryRecyclerAdapter(this, categoryList)
-        recyclerCategory.adapter = categoryRecyclerAdapter
-        recyclerCategory.layoutManager = categoryLayoutManager
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameReplaceCat,CategoryFragment())
+            .commit()
 
 
-        val url = "https://gnews.io/api/v4/search?q=example&lang=en&country=in&apikey=2ba40b1f3eee81067a9100fcb580bb4b"
-        val queue = Volley.newRequestQueue(applicationContext)
-
-        //this is the url of server from where we will get the response. WE ALSO NEED A TOKEN ALONG WITH URL
-        //anonymous object syntax. header will be sent with url
-
-
-        // check connectivity to internet and if true, proceed to get response and map data
-        val jsonObjectRequest = object :
-            JsonObjectRequest( //JOR method arguments: ReqMethod , url , jsonObject, ResponseListener, ErrorListener
-                Request.Method.GET, url, null, Response.Listener {
-                    println("Response is : $it")
-                }, Response.ErrorListener { // so app does not crash due to no activity
-                    //  VOLLEY ERRORS ARE HANDLED IN THE RESPONSE.ERRORLISTENER BLOCK. SO WE PUT TOAST HERE SAYING VOLLEY ERROR OCCURED
-                    println("volley error occured $it")
-                }) { //inside JsonObjectRequest(args) : we also send headers to validate unique request
-            //GETHEADERS METHOD TO SEND HEADER TO API
-            override fun getHeaders(): MutableMap<String, String> {
-                //headers are used to ensure each request is UNIQUE
-                //hashmap is another name for dictionary. so data is being received in string:string
-                val headers = HashMap<String, String>() //hashmap is derived from a mutable map
-                //headers["Content-type"] ="application/json" //key: content-type, value: application/json
-                //headers[" "] = " " //key: token, value: unique key given
-                return headers //this is sent to API.
-            }
-        }
-
-        queue.add(jsonObjectRequest)
     }
 
     override fun onBackPressed() {
@@ -118,4 +139,17 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.frameReplace,dashbordFrag)
         transaction.commit()
     }
+
+    override fun passData(categoryCOMM: String) {
+        val bundle = Bundle()
+        bundle.putString("category",categoryCOMM)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val fragmentContent = NewsDisplayFragment()
+        fragmentContent.arguments = bundle
+        transaction.replace(R.id.frameReplace , fragmentContent)
+        transaction.commit()
+    }
+
+
 }
