@@ -66,7 +66,7 @@ class NewsDisplayFragment : Fragment() {
         //categoryName = "general"
         val view = inflater.inflate(R.layout.fragment_news_display, container, false)
         recyclerContent = view.findViewById(R.id.recyclerContent)
-        val apikey = "2ba40b1f3eee81067a9100fcb580bb4b";
+        val apikey = "ENTER YOUR UNIQUE API KEY FROM GNEWS";
 
         val url = "https://gnews.io/api/v4/top-headlines?category=${categoryName}&lang=en&country=in&max=10&apikey=${apikey}";
 
